@@ -12,11 +12,11 @@ const config: HardhatUserConfig = {
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 5,
     },
-    // localhost: {
-    //   url: "http://127.0.0.1:8545/",
-    //   // saveDeployments: true,
-    //   chainId: 31337,
-    // },
+    localhost: {
+      url: "http://127.0.0.1:8545/",
+      // saveDeployments: true,
+      chainId: 31337,
+    },
   },
   solidity: {
     compilers: [
