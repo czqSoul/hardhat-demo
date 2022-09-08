@@ -1,18 +1,33 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const network = process.env.HARDHAT_NETWORK;
+  const address = process.env.ADDRESS as string;
+  console.log("network:", network);
+  const provider = ethers.provider;
+  const networkInfo = await provider.getNetwork();
+  console.log(`networkInfo: ${JSON.stringify(networkInfo)}`);
 
-  const lockedAmount = ethers.utils.parseEther("0.0002");
+  const signer = await ethers.getSigner();
+  console.log(`connected wallet: ${signer.address}`);
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const myAddrBalance = await provider.getBalance(
+    "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"
+  );
+  console.log("balance", myAddrBalance);
 
-  await lock.deployed();
+  const MappingTest = await ethers.getContractFactory("MappingTest", signer);
+  const mappingTest = await MappingTest.deploy();
+  await mappingTest.deployed();
 
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  // const tx = await mappingTest.regeister(signer.address, "soul");
+  // const confirm = await tx.wait();
+  // console.log(
+  //   `tx was successful in ${
+  //     confirm.transactionHash
+  //   } with gasUsed ${confirm.gasUsed.toString()}`
+  // );
+  console.log("address", mappingTest.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
