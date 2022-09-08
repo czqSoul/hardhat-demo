@@ -1,35 +1,33 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+// SPDX-License-Identifier: NONE
 
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
+pragma solidity^0.8.9;
+contract PayableTest{
+    function pay() public payable{
 
-contract Lock {
-    string public constant soul = "soul";
-    uint public unlockTime;
-    address payable public owner;
-
-    event Withdrawal(uint amount, uint when);
-
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
-
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
     }
+    function getBalance() public view returns(uint){
+        return address(this).balance;
+    }
+    function getRanddomBalance(address _a) public view returns(uint){
+        return _a.balance;
+    }
+    function transfer() public payable{
+        // payable address类型需要用payable包裹
+        address payable  account = payable(0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2);
+        account.transfer(msg.value);
+    }
+     function transfer2(address payable _account) public payable{
+        _account.transfer(msg.value);
+    }
+    function transfer3() payable external{
+        payable(this).transfer(msg.value);
+    }
+    // 我没太明白为啥要实现这个方法
+    fallback () external payable{
 
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
-
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
-
-        emit Withdrawal(address(this).balance, block.timestamp);
-
-        owner.transfer(address(this).balance);
+    }
+     // 我没太明白为啥要实现这个方法
+    receive() external payable {
+       
     }
 }
