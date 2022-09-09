@@ -12,12 +12,11 @@ contract DynamicArray {
     }
 
     modifier OnlyOwner() {
-        require(owner != address(0), "no permissios");
+        require(owner == msg.sender, "no permissios");
         _;
     }
 
     function remove(uint _index) public payable OnlyOwner {
-        // require(_index > arr.length, "cannot be less than 0");
         for (uint i = _index; i < arr.length - 1; i++) {
             arr[i] = arr[i + 1];
         }
