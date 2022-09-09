@@ -3,12 +3,17 @@
   "scripts": {
     "deploy:node": "npx hardhat node",
     "deploy:localhost": "npx hardhat run --network localhost scripts/deploy.ts",
+    "deploy:DynamicArrayLocalhost": "npx hardhat run --network localhost scripts/dynamicArrayDeploy.ts",
     "dev": "yarn deploy:localhost",
-    "deploy:goerli": "npx hardhat run --network goerli scripts/deploy.ts",
+
+
+
+    "deploy:goerli": "npx hardhat run --network goerli scripts/dynamicArrayDeploy.ts",
     "goerli": "yarn deploy:goerli"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@types/jest": "^29.0.0",
     "dotenv": "^16.0.2",
     "hardhat": "^2.11.1",
     "typescript": "^4.8.2"

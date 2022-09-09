@@ -11,25 +11,19 @@ async function main() {
   const signer = await ethers.getSigner();
   console.log(`connected wallet: ${signer.address}`);
 
-  const myAddrBalance = await provider.getBalance(
-    "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"
-  );
-  console.log("balance", myAddrBalance);
+  //   const myAddrBalance = await provider.getBalance(
+  //     "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"
+  //   );
 
-  const PayableTest = await ethers.getContractFactory("PayableTest", signer);
-  const payableTest = await PayableTest.deploy();
-  await payableTest.deployed();
-
-  const tx = await payableTest.transfer(
-    "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
-    ethers.utils.parseUnits("1", "ether")
-  );
-  const confirm = await tx.wait();
-  console.log(
-    `tx was successful in ${
-      confirm.transactionHash
-    } with gasUsed ${confirm.gasUsed.toString()}`
-  );
+  const DynamicArray = await ethers.getContractFactory("DynamicArray", signer);
+  const dynamicArray = await DynamicArray.deploy();
+  await dynamicArray.deployed();
+  console.log("address:", dynamicArray.address);
+  //   const tx = await dynamicArray.getArray();
+  //   // const confirm = await tx.wait();
+  //   console.log(tx);
+  //   const arrTx=await dynamicArray.remove(1);
+  //   const arrConfirm
 }
 
 // We recommend this pattern to be able to use async/await everywhere

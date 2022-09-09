@@ -5,7 +5,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const INFURA_ID = process.env.INFURA_ID;
 const ETHERSCAN_ID = process.env.ETHERSCAN_ID;
 const config: HardhatUserConfig = {
-  defaultNetwork: "goerli",
+  // defaultNetwork: "goerli",
   networks: {
     goerli: {
       url: `https://goerli.infura.io/v3/${INFURA_ID}`,
