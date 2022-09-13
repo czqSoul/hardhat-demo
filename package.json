@@ -8,7 +8,7 @@
 
 
 
-    "deploy:goerli": "npx hardhat run --network goerli scripts/dynamicArrayDeploy.ts",
+    "deploy:goerli": "npx hardhat run --network goerli scripts/deployInterableMapping.ts",
     "goerli": "yarn deploy:goerli"
   },
   "devDependencies": {

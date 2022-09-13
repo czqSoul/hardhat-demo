@@ -5,7 +5,6 @@ pragma solidity ^0.8.9;
 contract DynamicArray {
     uint[] public arr;
     address public owner;
-
     constructor() {
         owner = msg.sender;
         arr = [1, 2, 3, 4];
